@@ -1,4 +1,4 @@
-#This file stores variables for use 
+#This file stores variables for use
 #throughout the MALT90 reduction pipeline
 
 #moment_map
@@ -10,7 +10,7 @@ base = '/DATA/MALT_1/MALT90/'
 #reduce_malt
 #vnum = "1.6"
 vnum = {"rename":"1.5","ldata":"1.6","gzilla":"1.6","arrange":"1.6","mommaps":"1.6"}
-#sd = '/nfs/atapplic/malt/reduce/'                                                                                                                                                        
+#sd = '/nfs/atapplic/malt/reduce/'
 sd = '/epp/atapplic/malt/malt90-analysis-code/reduce/' #Seems to be new location
 data_dir = base+'data/'
 data_dir_y1 = base+'data/'+'year1/'
