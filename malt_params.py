@@ -3,6 +3,13 @@
 #Updated for remaking moment maps on Butch
 #where not all the pipeline will work.
 
+
+lines = ["hnco413","c2h","sio","h41a",
+         "hc13ccn","hnco404","ch3cn","hc3n",
+         "h13cop","hn13c","13cs","13c34s",
+         "hcop","hnc","n2hp","hcn",
+         ]
+
 #Redundant with data_dir
 
 base = '/Volumes/Scratch/malt90'
@@ -11,7 +18,7 @@ base = '/Volumes/Scratch/malt90'
 vnum = {"rename":"1.5","ldata":"1.6","gzilla":"1.6","arrange":"1.6","mommaps":"1.7"}
 #sd = '/nfs/atapplic/malt/reduce/'
 sd = '/epp/atapplic/malt/malt90-analysis-code/reduce/' #Seems to be new location
-data_dir = base+
+data_dir = base
 
 #ReduceLog
 log_location = base+'reduction_log.txt'

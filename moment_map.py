@@ -115,7 +115,8 @@ def do_source(source,lines,direction=None,auto=False,
         #print(infile)
         a = infile[:-9]
         out_base = a.replace("gridzilla","mommaps")
-        out_base.replace("source",outname)
+        out_base = out_base.replace(source,outname)
+        print("Out_base: "+out_base)
         out_dir = outname+"_"+direction+line+"_mommaps"
         if altdir:
             malt.data_dir = altdir
@@ -265,10 +266,6 @@ def save_maps(maps,hdout,out_base,out_dir,vel,minchan,maxchan,vwidth,name_mod):
 
     (head,tail) = os.path.split(out_base)
     out_base2 = os.path.join(out_dir,tail)
-#       out_temp = os.path.join(out_base2,tail)
-    #print("Base for output")
-    #print(out_base2)
-#       print(out_temp)
     out_base = out_base2
     print("Saving maps to: "+out_base)
     #This trims out sources with sigma_v > 1000 km/s

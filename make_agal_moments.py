@@ -21,6 +21,8 @@ def main():
     t = mcat.read("/Users/jonathanfoster/Desktop/Current/Malt90/malt90_lineinfo.cat")
     for i,source in enumerate(t['ag_id']):
         malt90_map = t['malt90_map_filename'][i]
+        print("Doing source: "+source)
+        print("With MALT90 Map: "+malt90_map)
         moment_map.do_source(malt90_map,malt.lines,
                              outname=source,vel=t['consensus_velocity'][i])
 

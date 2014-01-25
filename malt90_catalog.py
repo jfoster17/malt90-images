@@ -4,8 +4,8 @@ Just read in the malt90_lineinfo catalog
 """
 from astropy.table import Table
 
-def read():
-    t = Table.read("../malt90_lineinfo.cat",format = "ascii",
+def read(infile):
+    t = Table.read(infile,format = "ascii",
          names = ('ag_id', 'ag_name', 'ag_long', 'ag_lat', 'malt90_id', 'malt90_name',
                   'malt90_map_filename', 'malt90_pos', 'classification',
                   'classification_string', 'consensus_velocity',
