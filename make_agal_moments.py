@@ -23,8 +23,11 @@ def main():
         malt90_map = t['malt90_map_filename'][i]
         print("Doing source: "+source)
         print("With MALT90 Map: "+malt90_map)
+        vel = t['consensus_velocity'][i]
+        if vel < -300 or vel > 300:
+            vel = 0
         moment_map.do_source(malt90_map,malt.lines,
-                             outname=source,vel=t['consensus_velocity'][i])
+                             outname=source,vel=vel)
 
 if __name__ == '__main__':
     main()
