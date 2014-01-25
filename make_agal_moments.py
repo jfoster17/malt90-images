@@ -11,6 +11,18 @@ than
 """
 
 import sys,os
-import malt_params as malt
 import numpy as np
-from astropy.table import Table
+
+import malt_params as malt
+import malt90_catalog as mcat
+import moment_map as moment_map
+
+def main():
+    t = mcat.read("/Users/jonathanfoster/Desktop/Current/Malt90/malt90_lineinfo.cat")
+    for i,source in enumerate(t['ag_id']):
+        malt90_map = t['malt90_map_filename'][i]
+        moment_map.do_source(malt90_map,malt.lines,
+                             outname=source,vel=t['consensus_velocity'][i])
+
+if __name__ == '__main__':
+    main()

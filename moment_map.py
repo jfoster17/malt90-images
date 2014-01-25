@@ -91,8 +91,14 @@ def identify_velocity(source,minchan=200,maxchan=3896,sig=5,direction=None,altdi
     ind_vels = np.array(ind_vels)
     return(np.median(ind_vels))
 
-def do_source(source,lines,direction=None,auto=False,altdir=None,vel=-999):
+def do_source(source,lines,direction=None,auto=False,
+              outname=None,altdir=None,vel=-999):
     print("Sourcename: "+source)
+    if outname:
+        pass
+    else:
+        outname=source
+
     if vel == -999:
         central_velocity = get_velocity(source,auto,direction,altdir)
     else:
@@ -109,7 +115,8 @@ def do_source(source,lines,direction=None,auto=False,altdir=None,vel=-999):
         #print(infile)
         a = infile[:-9]
         out_base = a.replace("gridzilla","mommaps")
-        out_dir = source+"_"+direction+line+"_mommaps"
+        out_base.replace("source",outname)
+        out_dir = outname+"_"+direction+line+"_mommaps"
         if altdir:
             malt.data_dir = altdir
         try:
