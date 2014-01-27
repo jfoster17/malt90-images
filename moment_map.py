@@ -246,7 +246,13 @@ def do_predetermined_velocity(central_velocity,vel,hdout,n_edge,nchan,d,n_pad):
     """Make a moment map once we know central velocity."""
 
     hispec = np.nonzero(vel >= central_velocity)[0]
-    cenchan = hispec[0]
+    print(vel)
+    print(central_velocity)
+    print(hispec)
+    try:
+        cenchan = hispec[0]
+    except IndexError:
+        cenchan = nchan-2*n_edge
     minchan = max([cenchan - n_pad,n_edge])
     maxchan = min([cenchan + n_pad,nchan-n_edge])
     #print(cenchan)
