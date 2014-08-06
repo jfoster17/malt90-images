@@ -4,6 +4,13 @@ Just read in the malt90_lineinfo catalog
 """
 from astropy.table import Table
 
+def readnew(infile):
+    t = Table.read(infile,format = "ascii",
+         names = ('ag_id', 'ag_name', 'ag_long', 'ag_lat', 'unkown1', 'unknown2', 'unknown3', 'malt90_map_filename',
+                 'unknown4', 'unknown5', 'malt90_pos', 'malt90_name','malt90_id')
+                )
+    return(t)
+
 def read(infile):
     t = Table.read(infile,format = "ascii",
          names = ('ag_id', 'ag_name', 'ag_long', 'ag_lat', 'malt90_id', 'malt90_name',
