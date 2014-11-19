@@ -6,7 +6,7 @@ make_agal_moments
 Make moment maps using the catalog from Jill/Scott
 
 Make a moment map for each ATLASGAL source. Simpler
-than anything else.
+than anything else. 
 
 6/5/14: New ATLASGAL names/catalog requires a remake
 
@@ -26,24 +26,18 @@ import moment_map as moment_map
 
 from astropy.table import Table
 def main():
-    #t = mcat.read("/Users/jonathanfoster/Desktop/Current/Malt90/malt90_lineinfo.cat")
-    t = mcat.readnew("/Users/jonathanfoster/Desktop/Current/Malt90/ATLASGALsources_coveredby_MALT90.list")
-    vv = Table.read('consenvels.dat',names=["source","novbest","vbest","veldev"],format="ascii")
-    for i,source in enumerate(t['ag_id']):
+    t = mcat.readlatest("../results/malt90catalog.cat")
+    for i,source in enumerate(t['agid']):
         number = float(source[2:])
-        agalname = t['ag_name'][i]
-        goodrow = vv[vv['source'] == agalname]
-        malt90_map = t['malt90_map_filename'][i]
-        malt90_pos = t['malt90_pos'][i]
+        agalname = t['source'][i]
+        malt90_map = t['malt90_map'][i]
+        vel = float(t['velocity'][i])
         
-        if (number > 0) and ((malt90_pos == "YCM") or (malt90_pos == "YEM")): #To allow me to specify
+        if (number > 0): #To allow me to specify
             print("Doing source: "+source)
             print("With MALT90 Map: "+malt90_map)
             print("This is AGAL: "+agalname)
-            vel = goodrow['vbest']
             if vel < -300 or vel > 300:
-                vel = 0
-            if not goodrow:
                 vel = 0
             moment_map.do_source(malt90_map,malt.lines,
                                      outname=source,vel=vel)

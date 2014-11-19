@@ -11,6 +11,23 @@ def readnew(infile):
                 )
     return(t)
 
+def readlatest(infile):
+    t = Table.read(infile,format="ascii.fixed_width",
+                col_starts=[0,7 ,30,32,43,51,59, 81,103,110,209,421,633,845,1057,1269,1481,1693,1905,2117,2329,2541,2753,2956,3168,3389],
+                col_ends  =[6,29,31,42,50,58,80,102,109,120,218,430,642,854,1066,1278,1490,1702,1914,2126,2338,2550,2762,2965,3177,3398],
+                header_start=None,
+                data_start = 0,
+                guess=False,
+                names=["agid","source","L","ag_long","ag_lat","m90id","malt90_name",
+                       "malt90_map","m90_p","velocity",
+                       "hcop_ii","hnc_ii","n2hp_ii","hcn_ii",
+                       "h13cop_ii","hn13c_ii","13cs_ii","hc13ccn_ii",
+                       "hnco404_ii","ch3cn_ii","sio_ii","hc3n_ii",
+                       "c2h_ii","hnco413_ii","13c34s_ii","h41a_ii"],
+                )
+    #print(t[0:30])
+    return(t)
+
 def read(infile):
     t = Table.read(infile,format = "ascii",
          names = ('ag_id', 'ag_name', 'ag_long', 'ag_lat', 'malt90_id', 'malt90_name',
