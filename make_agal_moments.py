@@ -14,6 +14,11 @@ wastes a little bit of space/processing time.
 Using the consenvels.dat (Thu Jun 19 01:20:25 2014) 
 from Scott. Need to cross-correlate with the main list
 to get AGAL IDs
+
+Main other dependencies to check/edit:
+moment_map
+malt90_catalog
+malt_params
 """
 
 import sys,os
@@ -25,7 +30,7 @@ import moment_map as moment_map
 
 from astropy.table import Table
 def main():
-    t = mcat.read_latest("../results/malt90catalog.cat")
+    t = mcat.read_latest(malt.base+"/results/malt90catalog.cat")
     for i,source in enumerate(t['agid']):
         number = float(source[2:])
         agalname = t['source'][i]

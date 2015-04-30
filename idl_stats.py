@@ -4,7 +4,7 @@
 idl_stats.py
 
 This package reproduces some of the more useful
-IDL statistica routines in python.
+IDL statistical routines in python.
 
 Created by Jonathan Foster on 2010-12-03.
 
