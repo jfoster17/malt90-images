@@ -1,10 +1,31 @@
 """
 Just read in the malt90_lineinfo catalog
 
+The format changes between versions. Without a more flexible 
+parser we're stuck producing a new version for each format 
+change.
+
+Update read_latest to point to the latest version.
+
 """
 from astropy.table import Table
 
-def read_yeah_this_changed_again(infile):
+def read_latest(infile):
+    """
+    A statically named method to always point
+    to the latest version of the catalog parser.
+
+    Keeping this updated means we don't have to edit:
+
+    make_moment_images.py
+    make_agal_moments.py
+    make_classification_images.py
+
+    which are the main places this is used
+    """
+    return(read_v3(infile))
+
+def read_v3(infile):
     t = Table.read(infile,format="ascii.fixed_width",
                 ##         id,s, L  lo la mi mn  mm  mp, mv,hco,hnc,n2h,hcn,h13 ,hn13,13cs,hc13,404, ch3 ,sio ,hc3n, c2h,413,13c34,h41
                 col_starts=[0,7 ,30,36,46,60,69, 91,107,115,213,429,645,861,1077,1293,1509,1725,1941,2157,2373,2589,2805,3021,3237,3453],
@@ -19,11 +40,10 @@ def read_yeah_this_changed_again(infile):
                        "hnco404_ii","ch3cn_ii","sio_ii","hc3n_ii",
                        "c2h_ii","hnco413_ii","13c34s_ii","h41a_ii"],
                 )
-    print(t[0])
-
+    #print(t[0])
     return(t)
 
-def readlatest(infile):
+def read_v2(infile):
     t = Table.read(infile,format="ascii.fixed_width",
                 col_starts=[0,7 ,30,32,43,51,59, 81,103,110,209,421,633,845,1057,1269,1481,1693,1905,2117,2329,2541,2753,2956,3168,3389],
                 col_ends  =[6,29,31,42,50,58,80,102,109,120,218,430,642,854,1066,1278,1490,1702,1914,2126,2338,2550,2762,2965,3177,3398],
@@ -41,7 +61,7 @@ def readlatest(infile):
     return(t)
 
 
-def readnew(infile):
+def read_v1(infile):
     t = Table.read(infile,format = "ascii",
          names = ('ag_id', 'ag_name', 'ag_long', 'ag_lat', 'unkown1', 'unknown2', 'unknown3', 'malt90_map_filename',
                  'unknown4', 'unknown5', 'malt90_pos', 'malt90_name','malt90_id')
@@ -49,7 +69,7 @@ def readnew(infile):
     return(t)
 
 
-def read(infile):
+def read_v0(infile):
     t = Table.read(infile,format = "ascii",
          names = ('ag_id', 'ag_name', 'ag_long', 'ag_lat', 'malt90_id', 'malt90_name',
                   'malt90_map_filename', 'malt90_pos', 'classification',

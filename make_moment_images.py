@@ -24,7 +24,7 @@ mainlines = ["hcop","hnc","n2hp","hcn"]
 
 def generate_pickle():
     all_cores = []
-    t = mcat.read_yeah_this_changed_again("../results/malt90catalog.cat")
+    t = mcat.read_latest("../results/malt90catalog.cat")
 
     #print(t)
     #f = open("../malt90_lineinfo.cat")

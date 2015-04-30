@@ -28,7 +28,7 @@ import moment_map as moment_map
 
 from astropy.table import Table
 def main():
-    t = mcat.read_yeah_this_changed_again("../results/malt90catalog.cat")
+    t = mcat.read_latest("../results/malt90catalog.cat")
     for i,source in enumerate(t['agid']):
         number = float(source[2:])
         agalname = t['source'][i]
