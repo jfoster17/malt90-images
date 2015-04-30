@@ -1,6 +1,22 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """
+Make nice looking images of the 0th moment maps
+
+This is a wrapper script that calls the functions
+in MALT90Source which actually know how to display
+the moment maps. In this wrapper we just load in
+a catalog and generate images for all the entries.
+
+Main other dependencies to check/edit:
+MALT90Source
+malt90_catalog
+malt_params
+
+Generally you will want to run make_agal_moments.py
+before running this script to update the actual
+moment maps before vizualizing them.
+
 """
 
 import sys
@@ -12,6 +28,7 @@ from matplotlib.ticker import MaxNLocator
 from astropy.table import Table
 import numpy as np
 import malt90_catalog as mcat
+import malt_params as malt
 
 lines = ["hnco413","c2h","sio","h41a",
          "hc13ccn","hnco404","ch3cn","hc3n",
@@ -24,10 +41,8 @@ mainlines = ["hcop","hnc","n2hp","hcn"]
 
 def generate_pickle():
     all_cores = []
-    t = mcat.read_latest("../results/malt90catalog.cat")
+    t = mcat.read_latest(malt.base+"/results/malt90catalog.cat")
 
-    #print(t)
-    #f = open("../malt90_lineinfo.cat")
     for i,source in enumerate(t['agid']):
         if i < 10000:
             print(source)
@@ -40,7 +55,6 @@ def generate_pickle():
             min_distance = 3/60.
 
             nearby = t[(distances < min_distance)]
-            #print(nearby)
 
             source_lons = nearby['ag_long']
             source_lats = nearby['ag_lat']
@@ -54,21 +68,16 @@ def generate_pickle():
 
 def make_moment_images(all_cores):
     tagall = "AllLines"
-
     format = ".png"
     for core in all_cores:
-        core.make_moment_images(lines,tagall,format=format,mom='mom0',outdir="/Volumes/Screwdriver/malt90/results/mom0/NewLines")
-
-
+        core.make_moment_images(lines,tagall,format=format,mom='mom0',outdir=malt.base+"/results/mom0/NewLines")
 
 
 def main():
-    #Of course unpickling does not work for astropy.table
-    #Fixed in dev version, but hard to merge myself. 
-    #Just generate the list every time.
+    #Pickling does not work for old versions of astropy.table
+    #Just generate the list every time for consistency.
     all_cores = generate_pickle()
     make_moment_images(all_cores)
-    #do_spectra_plots(all_cores)
 
 
 if __name__ == '__main__':

@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """
-make_agal_moments
-
 Make moment maps using the catalog from Jill/Scott
 
-Make a moment map for each ATLASGAL source. Simpler
-than anything else. 
+Make a moment map for each ATLASGAL source. This
+is simpler than doing anything else and only
+wastes a little bit of space/processing time. 
 
 1/13/2015: New ALTASGAL names being used again
 
@@ -15,8 +14,6 @@ than anything else.
 Using the consenvels.dat (Thu Jun 19 01:20:25 2014) 
 from Scott. Need to cross-correlate with the main list
 to get AGAL IDs
-
-
 """
 
 import sys,os
@@ -35,7 +32,7 @@ def main():
         malt90_map = t['malt90_map'][i]
         vel = float(t['velocity'][i])
         
-        if (number > 0): #To allow me to specify
+        if (number > 0): #To allow me to specify a start
             print("Doing source: "+source)
             print("With MALT90 Map: "+malt90_map)
             print("This is AGAL: "+agalname)
