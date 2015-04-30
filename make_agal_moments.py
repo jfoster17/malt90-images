@@ -8,6 +8,8 @@ Make moment maps using the catalog from Jill/Scott
 Make a moment map for each ATLASGAL source. Simpler
 than anything else. 
 
+1/13/2015: New ALTASGAL names being used again
+
 6/5/14: New ATLASGAL names/catalog requires a remake
 
 Using the consenvels.dat (Thu Jun 19 01:20:25 2014) 
@@ -26,7 +28,7 @@ import moment_map as moment_map
 
 from astropy.table import Table
 def main():
-    t = mcat.readlatest("../results/malt90catalog.cat")
+    t = mcat.read_yeah_this_changed_again("../results/malt90catalog.cat")
     for i,source in enumerate(t['agid']):
         number = float(source[2:])
         agalname = t['source'][i]

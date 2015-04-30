@@ -4,11 +4,23 @@ Just read in the malt90_lineinfo catalog
 """
 from astropy.table import Table
 
-def readnew(infile):
-    t = Table.read(infile,format = "ascii",
-         names = ('ag_id', 'ag_name', 'ag_long', 'ag_lat', 'unkown1', 'unknown2', 'unknown3', 'malt90_map_filename',
-                 'unknown4', 'unknown5', 'malt90_pos', 'malt90_name','malt90_id')
+def read_yeah_this_changed_again(infile):
+    t = Table.read(infile,format="ascii.fixed_width",
+                ##         id,s, L  lo la mi mn  mm  mp, mv,hco,hnc,n2h,hcn,h13 ,hn13,13cs,hc13,404, ch3 ,sio ,hc3n, c2h,413,13c34,h41
+                col_starts=[0,7 ,30,36,46,60,69, 91,107,115,213,429,645,861,1077,1293,1509,1725,1941,2157,2373,2589,2805,3021,3237,3453],
+                col_ends  =[6,29,31,47,57,67,90,106,114,125,222,438,654,870,1086,1302,1518,1734,1950,2166,2382,2598,2814,3030,3246,3462],
+                header_start=None,
+                data_start = 0,
+                guess=False,
+                names=["agid","source","L","ag_long","ag_lat","m90id","malt90_name",
+                       "malt90_map","m90_p","velocity",
+                       "hcop_ii","hnc_ii","n2hp_ii","hcn_ii",
+                       "h13cop_ii","hn13c_ii","13cs_ii","hc13ccn_ii",
+                       "hnco404_ii","ch3cn_ii","sio_ii","hc3n_ii",
+                       "c2h_ii","hnco413_ii","13c34s_ii","h41a_ii"],
                 )
+    print(t[0])
+
     return(t)
 
 def readlatest(infile):
@@ -27,6 +39,15 @@ def readlatest(infile):
                 )
     #print(t[0:30])
     return(t)
+
+
+def readnew(infile):
+    t = Table.read(infile,format = "ascii",
+         names = ('ag_id', 'ag_name', 'ag_long', 'ag_lat', 'unkown1', 'unknown2', 'unknown3', 'malt90_map_filename',
+                 'unknown4', 'unknown5', 'malt90_pos', 'malt90_name','malt90_id')
+                )
+    return(t)
+
 
 def read(infile):
     t = Table.read(infile,format = "ascii",
