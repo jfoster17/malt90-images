@@ -50,6 +50,8 @@ mips_path = "/Volumes/Mako3/mipsgal/"
 glimpseII_path = "/Volumes/Data1/GLIMPSEII/"
 mipsgalII_path = "/Volumes/Data1/MIPSGALII/"
 
+#Wise path information
+wise_path = base+"/results/WISE_Files/"
 
 #OLD Herschel information
 #Uncomment and update if we need to remake Herschel images from raw files.

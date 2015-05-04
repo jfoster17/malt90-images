@@ -24,6 +24,8 @@ class Malt90SourceBadMips(Malt90Source.Malt90Source):
 
     def identify_spitzer_mosaics(self):
         """ Selects the GLIMPSE/MIPSGAL image to display. """
+        wise_path = malt.wise_path
+        
         glimpse_path = malt.glimpse_path
         mips_path = malt.mips_path
         glimpseII_path = malt.glimpseII_path
@@ -73,36 +75,21 @@ class Malt90SourceBadMips(Malt90Source.Malt90Source):
         else:
             bname = 'p'
         
-        all_wise = os.listdir("WISE_Files")
+        all_wise = os.listdir(wise_path)
         search_string = "ra"+str(self.apos_ra)[0:6]
         print(search_string)
         for wise_file in all_wise:
             if search_string in wise_file:
                 if "w4" in wise_file:
-                    self.mips_mosaic = "WISE_Files/"+wise_file
+                    self.mips_mosaic = wise_path+wise_file
                 if "w3" in wise_file:
-                    self.glimpse_mosaic_4 = "WISE_Files/"+wise_file
+                    self.glimpse_mosaic_4 = wise_path+wise_file
                 if "w2" in wise_file:
-                    self.glimpse_mosaic_2 = "WISE_Files/"+wise_file
-                    self.glimpse_mosaic_3 = "WISE_Files/"+wise_file
+                    self.glimpse_mosaic_2 = wise_path+wise_file
+                    self.glimpse_mosaic_3 = wise_path+wise_file
                 if "w1" in wise_file:
-                    self.glimpse_mosaic_1 = "WISE_Files/"+wise_file
+                    self.glimpse_mosaic_1 = wise_path+wise_file
         print(self.mips_mosaic)
-        #Very special case
-        #if (self.id == "AG6645") or (self.id == "AG6647") or (self.id == "AG6673") or (self.id == "AG6678") or (self.id == "AG6679"):
-        #    for wise_file in all_wise:
-        #        if search_string in wise_file:
-        #            if "w4" in wise_file:
-        #                self.mips_mosaic = "WISE_Files/"+wise_file
-        #            if "w3" in wise_file:
-        #                self.glimpse_mosaic_4 = "WISE_Files/"+wise_file
-        #            if "w2" in wise_file:
-        #                self.glimpse_mosaic_2 = "WISE_Files/"+wise_file
-        #                self.glimpse_mosaic_3 = "WISE_Files/"+wise_file
-        #            if "w1" in wise_file:
-        #                self.glimpse_mosaic_1 = "WISE_Files/"+wise_file
-        #print("IRAC 1")
-        #print(self.IR1c)    
         self.IR1c = self.name+"_I1.fits"
         self.IR2c = self.name+"_I2.fits"
         self.IR3c = self.name+"_I3.fits"

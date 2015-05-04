@@ -4,7 +4,7 @@
 
 8/4/2014: Once more updating for new (hopefully final) catalog
 
-11/19/2014: Yet again the catalog has changed. Why?
+11/19/2014: Yet again the catalog has changed.
 
 """
 
@@ -15,7 +15,6 @@ import AgalSource
 import AgalSourceWise
 import numpy as np
 import gc as garbagecollection
-
 
 
 
@@ -102,11 +101,7 @@ def make_wise_lookup_table(t):
 
 def main():
     #Read in catalog
-    #t = mcat.read(
-    #    "/Users/jonathanfoster/Desktop/Current/Malt90/malt90_lineinfo.cat")
-    #t = mcat.readnew(
-    #        "/Users/jonathanfoster/Desktop/Current/Malt90/ATLASGALsources_coveredby_MALT90.list")
-    t = mcat.read_yeah_this_changed_again("../results/malt90catalog.cat")
+    t = mcat.read_latest("../results/malt90catalog.cat")
     #print(t['agid'])
     #return(0)
     #t = mcat.read("malt90_lineinfo_sm.cat")
@@ -129,7 +124,7 @@ def main():
         #malt90s = t[t['malt90_map_filename'] != 'notObs']
         #print(len(malt90s))
         
-        if (num > 1234): #and (num < 1950):
+        if (num > 0): #and (num < 1950):
             print("="*10+source+"="*10)
             #vel = t['consensus_velocity'][i]
             sourcename = t['malt90_map'][i]

@@ -594,24 +594,12 @@ class Malt90Source:
             #ATLASGAL does NOT use existing mosaics.
             #Instead, we fetch from Magpis
             print("Doing Atlasgal")
-            #print(self.filenames)
-            #ATLASGAL
             image = Magpis.get_images(coordinates.Galactic(float(self.glon), float(self.glat),
                     unit=(u.deg,u.deg)), image_size=cutsize*u.deg, survey='atlasgal')
             print(image)
             fits.writeto(self.filenames[undone_cutout],
                          image[0].data,image[0].header,clobber=True)
                 
-                
-                #reproject_map.do_reprojection(self.mips_mosaic,"J2000","GALACTIC",size=cutsize,center=(self.apos_ra,self.bpos_dec),
-                #                            outfile=self.filenames[undone_cutout])
-                #print(self.atlasgal_mos)
-                #reproject_map.do_reprojection(self.atlasgal_mos,"J2000","GALACTIC",size=cutsize,center=(self.apos_ra,self.bpos_dec),
-                #                            outfile=self.filenames[undone_cutout])
-            #except IndexError:
-            #    print("Failed to fetch data for ATLASGAL!!!")
-            #    return(False)
-            #os.remove(self.filenames[undone_cutout].replace('.fits','_area.fits'))
             
         elif undone_cutout.startswith("H"):
             #Herschel HiGal
@@ -627,7 +615,6 @@ class Malt90Source:
                 file2 = self.filenames[undone_cutout].replace("cutouts","temp").replace(".fits","2.fits")
                 reproject_map.do_reprojection(eval(mosaic),"J2000","GALACTIC",size=cutsize,center=(self.apos_ra,self.bpos_dec),
                                                 outfile=file2,list_o_files=True,hdu=1)
-                #montage.mosaic(self.storage_dir+"temp/",self.storage_dir+"temp2/")
                 #Now we assume these files are the exact same size and projection
                 dd1,hh1 = pyfits.getdata(file1,header=True)
                 dd2,hh2 = pyfits.getdata(file2,header=True)
@@ -647,7 +634,6 @@ class Malt90Source:
                     file2 = self.filenames[undone_cutout].replace("cutouts","temp").replace(".fits","2.fits")
                     reproject_map.do_reprojection(eval(mosaic),"J2000","GALACTIC",size=cutsize,center=(self.apos_ra,self.bpos_dec),
                                                     outfile=file2,list_o_files=True,hdu=1)
-                    #montage.mosaic(self.storage_dir+"temp/",self.storage_dir+"temp2/")
                     #Now we assume these files are the exact same size and projection
                     dd1,hh1 = pyfits.getdata(file1,header=True)
                     dd2,hh2 = pyfits.getdata(file2,header=True)
@@ -686,18 +672,14 @@ class Malt90Source:
             #print(i)
             if i == 0:
                 keys = line.split()
-                #print(keys)
             elif i == 1:
                 current_versions = line.split()
-                #print(current_versions)
-                #print(keys)
                 pair_list = []
                 for key,vers in zip(keys,current_versions):
                     pair_list.append((key,vers))
                 current_best_version = dict(pair_list)
             else:
                 data_items = line.split()
-                #print(data_items)
                 if data_items[0] == self.name:
                     pair_list = []
                     for key,vers in zip(keys,data_items):
@@ -736,11 +718,9 @@ class Malt90Source:
         herschel_path = malt.herschel_path
         list_all_mosaics = glob.glob(os.path.join(herschel_path,"Glon*"))
         list_all_mosaics.sort()
-        #print(list_all_mosaics)
         coords = [float(os.path.basename(a)[4:7]) for a in list_all_mosaics]
         coords = list(set(coords))
         coords.sort()
-        #print(coords)
         
         def find_le(a, x):
             'Find rightmost value less than or equal to x'
@@ -811,19 +791,6 @@ class Malt90Source:
         self.H250c_try2_file2 = currfile
         
         
-        print(self.H500c_try1_file1)
-        print(self.H500c_try1_file2)
-        print(self.H500c_try2_file1)
-        print(self.H500c_try2_file2)
-        print(self.H350c_try1_file1)
-        print(self.H350c_try1_file2)
-        print(self.H350c_try2_file1)
-        print(self.H350c_try2_file2)
-        print(self.H250c_try1_file1)
-        print(self.H250c_try1_file2)
-        print(self.H250c_try2_file1)
-        print(self.H250c_try2_file2)
-
     def identify_atlasgal_mosaics(self):
         """ Select the ATLASGAL mosaic for each source."""
         agal_path = malt.agal_path
