@@ -24,10 +24,10 @@ class Malt90SourceBadMips(Malt90Source.Malt90Source):
 
     def identify_spitzer_mosaics(self):
         """ Selects the GLIMPSE/MIPSGAL image to display. """
-        glimpse_path = "/Volumes/Mako3/glimpsev3/"
-        mips_path = "/Volumes/Mako3/mipsgal/"
-        glimpseII_path = "/Volumes/Data/GLIMPSEII/"
-        mipsgalII_path = "/Volumes/Data/MIPSGALII/"
+        glimpse_path = malt.glimpse_path
+        mips_path = malt.mips_path
+        glimpseII_path = malt.glimpseII_path
+        mipsgalII_path = malt.mipsgalII_path
         if self.glon > 180:
             self.l = self.glon-360.
         else:

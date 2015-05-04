@@ -21,6 +21,7 @@ from astroquery.magpis import Magpis
 from astropy import coordinates
 from astropy import units as u
 from astropy.io import fits
+import malt_params as malt
 
 
 class Malt90Source:
@@ -67,7 +68,7 @@ class Malt90Source:
                        "RH_Nim":["RH_N"],
                     }
 
-        self.storage_dir = "/Volumes/Screwdriver/malt90/images/"
+        self.storage_dir = malt.base+"/results/"
         self.auxiliary_log = self.storage_dir+"aux_data.log"
 
         ### Define the filename conventions ###
@@ -83,7 +84,7 @@ class Malt90Source:
             print("Failed to convert coordinates")
             self.apos = self.glon
             self.bpos = self.glat
-        self.data_base = "/Volumes/Screwdriver/malt90/sources/"
+        self.data_base = malt.base+"/sources/"
         self.line_name_trans = {"n2hp":r"$\mathrm{N_2H^+}$","hcop":r"$\mathrm{HCO^+}$","hcn":r"$\mathrm{HCN}$","hnc":r"$\mathrm{HNC}$",
                                 "13c34s":r"$\mathrm{^{13}C^{34}S}$","13cs":r"$\mathrm{^{13}CS}$","c2h":r"$\mathrm{C_2H}$","ch3cn":r"$\mathrm{CH_3CN}$",
                                 "h13cop":r"$\mathrm{H^{13}CO^{+}}$","h41a":r"$\mathrm{H41\alpha}$","hc3n":r"$\mathrm{HC_3N}$",
@@ -732,7 +733,7 @@ class Malt90Source:
 
     def identify_herschel_mosaics(self):
         """Identify the Herscehl mosaics for each source"""
-        herschel_path = "/Volumes/Mako3/higal_public_reg/"
+        herschel_path = malt.herschel_path
         list_all_mosaics = glob.glob(os.path.join(herschel_path,"Glon*"))
         list_all_mosaics.sort()
         #print(list_all_mosaics)
@@ -824,9 +825,8 @@ class Malt90Source:
         print(self.H250c_try2_file2)
 
     def identify_atlasgal_mosaics(self):
-        agal_path = "/Volumes/Data1/Herschel-ATLASGAL/"
-        
         """ Select the ATLASGAL mosaic for each source."""
+        agal_path = malt.agal_path
         if (self.glon) > -1 and (self.glon < 10):
             self.atlasgal_mos = agal_path+"ATLASGAL_main.fits"
         elif (self.glon) > 330 and (self.glon < 360):
@@ -860,7 +860,7 @@ class Malt90Source:
         Keep the same structure for consistency.
         
         """
-        h_path = "/Volumes/Data1/Herschel-ATLASGAL/"
+        h_path = malt.h_path
         
         self.RH_mos_T_try1 = os.path.join(h_path,"Tdust_ait.fits")
         self.RH_mos_T_try2 = os.path.join(h_path,"Tdust_ait.fits")
@@ -868,49 +868,13 @@ class Malt90Source:
         self.RH_mos_N_try2 = os.path.join(h_path,"N_ait.fits")
         
         
-        
-    def identify_herschel_result_mosaics(self):
-        """Select the Herschel result (T and logN) mosaic"""
-        h_path = "/Volumes/Data1/Herschel-ATLASGAL/hersheldata/"
-        list_all_mosaics = glob.glob(os.path.join(h_path,"Field*"))
-        list_all_mosaics.sort()
-        coords = [float(os.path.basename(a)[6:9]) for a in list_all_mosaics]
-        coords = list(set(coords))
-        coords.sort()
-        #print(coords)
-        
-        def find_le(a, x):
-            'Find rightmost value less than or equal to x'
-            i = bisect.bisect_right(a, x)
-            if i:
-                return a[i-1]
-            raise ValueError
-            
-        def find_ge(a, x):
-            'Find leftmost item greater than or equal to x'
-            i = bisect.bisect_left(a, x)
-            if i != len(a):
-                return a[i]
-            raise ValueError   
-        self.h_try1 = find_le(coords,self.glon)
-        try:
-            self.h_try2 = find_ge(coords,self.glon)
-        except ValueError:
-            self.h_try2 = self.h_try1
-            
-        self.RH_mos_T_try1 = os.path.join(h_path,"Field-"+str(int(self.h_try1)).zfill(3)+"_0","Tdust.fits")
-        self.RH_mos_T_try2 = os.path.join(h_path,"Field-"+str(int(self.h_try2)).zfill(3)+"_0","Tdust.fits")
-        self.RH_mos_N_try1 = os.path.join(h_path,"Field-"+str(int(self.h_try1)).zfill(3)+"_0","log10N.fits")
-        self.RH_mos_N_try2 = os.path.join(h_path,"Field-"+str(int(self.h_try2)).zfill(3)+"_0","log10N.fits")
-        print(self.RH_mos_T_try1)
-        print(self.RH_mos_T_try2)
-        
     def identify_spitzer_mosaics(self):
         """ Selects the GLIMPSE/MIPSGAL mosaic for each source. """
-        glimpse_path = "/Volumes/Mako3/glimpsev3/"
-        mips_path = "/Volumes/Mako3/mipsgal/"
-        glimpseII_path = "/Volumes/Data1/GLIMPSEII/"
-        mipsgalII_path = "/Volumes/Data1/MIPSGALII/"
+        glimpse_path = malt.glimpse_path
+        mips_path = malt.mips_path
+        glimpseII_path = malt.glimpseII_path
+        mipsgalII_path = malt.mipsgalII_path
+        
         if self.glon > 180:
             self.l = self.glon-360.
         else:

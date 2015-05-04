@@ -37,3 +37,21 @@ ver_dir = base+"results/verification/"
 #These are paths used by do_by_hand.py
 byhand_rename_dir = base+'data/byhand/renamed/'
 byhand_data_dir   = base+'data/byhand/'
+
+#ATLASGAL information        
+agal_path = "/Volumes/Data1/Herschel-ATLASGAL/"
+
+#Herschel information
+h_path = "/Volumes/Data1/Herschel-ATLASGAL/"
+
+#Spitzer information
+glimpse_path = "/Volumes/Mako3/glimpsev3/"
+mips_path = "/Volumes/Mako3/mipsgal/"
+glimpseII_path = "/Volumes/Data1/GLIMPSEII/"
+mipsgalII_path = "/Volumes/Data1/MIPSGALII/"
+
+
+#OLD Herschel information
+#Uncomment and update if we need to remake Herschel images from raw files.
+#herschel_path = "/Volumes/Mako3/higal_public_reg/"
+
