@@ -7,13 +7,15 @@ Optionally trim to make it square.
 Optrionally trim to a fixed size.
 """
 
-import montage
+try:
+    import montage
+except ImportError:
+    import montage_wrapper as montage
 import os
 import pyfits
 import astLib.astCoords as ac
 import astLib.astWCS as aw
 import subprocess
-import montage.status as status
 
 def main():
     pass

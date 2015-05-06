@@ -4,6 +4,7 @@ import aplpy
 import gc as garbagecollection
 import matplotlib
 import pyfits
+import malt_params as malt
 
 class AgalSource:
     """
@@ -63,7 +64,7 @@ class AgalSource:
             im.show_markers(self.near_lons,self.near_lats,edgecolor='blue',facecolor='none',marker='+',s=80,lw=1)
             im.show_markers(self.glon,self.glat,edgecolor='red',facecolor='none',marker='+',s=80,lw=1)
             im.show_ellipses(self.glon,self.glat,0.01,0.01,angle=0,facecolor='none',edgecolor='green',lw=2)
-            out_filename = "images/"+self.agal_id+"_"+name+".png"
+            out_filename = malt.image_dir+self.agal_id+"_"+name+".png"
             im.save(out_filename)
             print("Saving to: "+out_filename)
             im.close()
@@ -98,7 +99,7 @@ class AgalSource:
             im.show_markers(self.near_lons,self.near_lats,edgecolor='blue',facecolor='none',marker='+',s=80,lw=1)
             im.show_markers(self.glon,self.glat,edgecolor='red',facecolor='none',marker='+',s=80,lw=1)
             im.show_ellipses(self.glon,self.glat,0.01,0.01,angle=0,facecolor='none',edgecolor='green',lw=2)
-            out_filename = "images/"+self.agal_id+"_"+name+".png"
+            out_filename = malt.image_dir+self.agal_id+"_"+name+".png"
             im.save(out_filename)
             print("Saving to: "+out_filename)
             im.close()

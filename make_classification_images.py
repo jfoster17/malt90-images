@@ -15,7 +15,7 @@ import AgalSource
 import AgalSourceWise
 import numpy as np
 import gc as garbagecollection
-
+import malt_params as malt
 
 
 #bad_mips = [780.0, 2584.0, 3325.0, 3329.0, 4354.0,
@@ -141,9 +141,9 @@ def main():
             source_ids = nearby['agid']
             cat_row = t[i] 
             
-            aim = "images/"+source+"_Aim.png"
-            gim = "images/"+source+"_Gim.png"
-            mim = "images/"+source+"_Mim.png"
+            aim = malt.image_dir+source+"_Aim.png"
+            gim = malt.image_dir+source+"_Gim.png"
+            mim = malt.image_dir+source+"_Mim.png"
             
             if ((not os.path.isfile(aim)) or (not os.path.isfile(gim)) or (not os.path.isfile(mim))):
                 do_images = True                
@@ -154,7 +154,7 @@ def main():
             if (num in bad_mips) and do_images: 
                 agal = AgalSourceWise.AgalSourceWise(source,cat_row,
                                              source_lons,source_lats,source_ids)
-                #agal.make_classification_images()
+                agal.make_classification_images()
                 agal.make_herschel_result_images()
                 del agal
             else:
@@ -163,7 +163,7 @@ def main():
                     #try:
                     agal = AgalSource.AgalSource(source,cat_row,
                                              source_lons,source_lats,source_ids)
-                    #agal.make_classification_images()
+                    agal.make_classification_images()
                     agal.make_herschel_result_images()
                     #except :
                     #    f1 = open('newest_bad_agals.txt','a')

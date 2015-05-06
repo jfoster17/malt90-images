@@ -4,7 +4,7 @@ import astLib.astCoords as ac
 import pyfits
 import numpy as np
 import aplpy
-import numdisplay.zscale as zscale
+import zscale
 import montage
 import Malt90Source
 

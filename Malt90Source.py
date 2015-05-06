@@ -7,8 +7,7 @@ import astLib.astWCS as astWCS
 import pyfits
 import numpy as np
 import aplpy
-import numdisplay.zscale as zscale
-import montage
+import zscale
 import gc as garbagecollection
 import matplotlib
 import bisect
@@ -23,6 +22,10 @@ from astropy import units as u
 from astropy.io import fits
 import malt_params as malt
 
+try:
+    import montage
+except ImportError:
+    import montage_wrapper as montage
 
 class Malt90Source:
     """A class to store information about a Malt90Source"""

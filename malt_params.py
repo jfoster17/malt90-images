@@ -13,6 +13,7 @@ lines = ["hnco413","c2h","sio","h41a",
 #Redundant with data_dir
 
 base = '/Volumes/Screwdriver/malt90'
+image_dir = base+"/results/images/"
 
 #reduce_malt
 vnum = {"rename":"1.5","ldata":"1.6","gzilla":"1.6","arrange":"1.6","mommaps":"1.7"}
