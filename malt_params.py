@@ -13,6 +13,7 @@ lines = ["hnco413","c2h","sio","h41a",
 #Redundant with data_dir
 
 base = '/Volumes/Screwdriver/malt90'
+image_dir = base+"/results/images/"
 
 #reduce_malt
 vnum = {"rename":"1.5","ldata":"1.6","gzilla":"1.6","arrange":"1.6","mommaps":"1.7"}
@@ -37,3 +38,23 @@ ver_dir = base+"results/verification/"
 #These are paths used by do_by_hand.py
 byhand_rename_dir = base+'data/byhand/renamed/'
 byhand_data_dir   = base+'data/byhand/'
+
+#ATLASGAL information        
+agal_path = "/Volumes/Data1/Herschel-ATLASGAL/"
+
+#Herschel information
+h_path = "/Volumes/Data1/Herschel-ATLASGAL/"
+
+#Spitzer information
+glimpse_path = "/Volumes/Mako3/glimpsev3/"
+mips_path = "/Volumes/Mako3/mipsgal/"
+glimpseII_path = "/Volumes/Data1/GLIMPSEII/"
+mipsgalII_path = "/Volumes/Data1/MIPSGALII/"
+
+#Wise path information
+wise_path = base+"/results/WISE_Files/"
+
+#OLD Herschel information
+#Uncomment and update if we need to remake Herschel images from raw files.
+#herschel_path = "/Volumes/Mako3/higal_public_reg/"
+

@@ -12,11 +12,12 @@ import idl_stats
 import interpolate_image
 import malt_params as malt
 
-class MALT90Source():
+class MALT90MomentSource():
     """
-    Base class for MALT90 sources
+    A simple class to just make moment map images for a source.
     
-    This is actually a stripped down version to just deal with moment maps.
+    Has some code overlap with the general MALT90Source class
+    but not enough to make inheritence easy/worthwhile.
     """
 
     def __init__(self,atlasgal_id,goodname,velocity,cat_row,source_lons,source_lats,source_ids):
