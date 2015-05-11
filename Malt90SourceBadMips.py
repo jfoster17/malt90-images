@@ -5,7 +5,10 @@ import pyfits
 import numpy as np
 import aplpy
 import zscale
-import montage
+try:
+    import montage
+except ImportError:
+    import montage_wrapper as montage
 import Malt90Source
 
 class Malt90SourceBadMips(Malt90Source.Malt90Source):

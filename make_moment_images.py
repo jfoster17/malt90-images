@@ -21,14 +21,18 @@ moment maps before vizualizing them.
 
 import sys
 import os
-import MALT90Source
+import MALT90MomentSource
 import pickle
+import matplotlib
+matplotlib.use('Agg')
+
 import matplotlib.pylab as plt
 from matplotlib.ticker import MaxNLocator
 from astropy.table import Table
 import numpy as np
 import malt90_catalog as mcat
 import malt_params as malt
+
 
 lines = ["hnco413","c2h","sio","h41a",
          "hc13ccn","hnco404","ch3cn","hc3n",
@@ -60,7 +64,8 @@ def generate_pickle():
             source_lats = nearby['ag_lat']
             source_ids = nearby['agid']
 
-            all_cores.append(MALT90Source.MALT90Source(source,sourcename,vel,t[i],source_lons,source_lats,source_ids))
+            all_cores.append(MALT90MomentSource.MALT90MomentSource(
+                source,sourcename,vel,t[i],source_lons,source_lats,source_ids))
 
     return(all_cores)
 

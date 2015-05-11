@@ -12,7 +12,7 @@ lines = ["hnco413","c2h","sio","h41a",
 
 #Redundant with data_dir
 
-base = '/Volumes/Screwdriver/malt90'
+base = '/DATA/MALT_1/MALT90/malt90_images/'
 image_dir = base+"/results/images/"
 
 #reduce_malt
@@ -39,6 +39,20 @@ ver_dir = base+"results/verification/"
 byhand_rename_dir = base+'data/byhand/renamed/'
 byhand_data_dir   = base+'data/byhand/'
 
+#These are hand-downloaded WISE files to
+#replace Spitzer images where Spitzer images
+#are unavailable due to the edge of the coverage
+#regions.
+#Wise path information
+wise_path = base+"/results/WISE_Files/"
+
+#Below here the links are hard-coded to the locations
+#of data files on disk. These are for butch.astro.yale.edu
+#and would need to be updated to work here on draco.
+#We would need/want to port the same data structure
+#somewhere on draco. Only necessary if we need to add
+#new sources.
+
 #ATLASGAL information        
 agal_path = "/Volumes/Data1/Herschel-ATLASGAL/"
 
@@ -51,8 +65,6 @@ mips_path = "/Volumes/Mako3/mipsgal/"
 glimpseII_path = "/Volumes/Data1/GLIMPSEII/"
 mipsgalII_path = "/Volumes/Data1/MIPSGALII/"
 
-#Wise path information
-wise_path = base+"/results/WISE_Files/"
 
 #OLD Herschel information
 #Uncomment and update if we need to remake Herschel images from raw files.
