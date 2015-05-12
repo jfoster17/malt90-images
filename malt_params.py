@@ -54,10 +54,10 @@ wise_path = base+"/results/WISE_Files/"
 #new sources.
 
 #ATLASGAL information        
-agal_path = "/Volumes/Data1/Herschel-ATLASGAL/"
+agal_path = base+"/herschel-atlasgal/"
 
 #Herschel information
-h_path = "/Volumes/Data1/Herschel-ATLASGAL/"
+h_path = base+"/herschel-atlasgal/"
 
 #Spitzer information
 glimpse_path = "/Volumes/Mako3/glimpsev3/"
