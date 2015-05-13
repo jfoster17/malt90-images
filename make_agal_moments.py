@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """
-Make moment maps of ATLASGAL sources using the catalog
-from Jill/Scott. 
+Make moment maps of ATLASGAL sources
 
 usage: make_agal_moments [-h] [-i n] 
 
@@ -37,7 +36,7 @@ def main():
         sys.exit(2)
     for o,a in opts:
         if o == "-i":
-            start_id = a
+            start_id = int(a)
         elif o == "-h":
             print(__doc__)
             sys.exit(1)
