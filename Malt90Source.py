@@ -1,6 +1,4 @@
 import os,sys
-import matplotlib
-matplotlib.use('Agg')
 import reproject_map
 import astLib.astCoords as ac
 import astLib.astWCS as astWCS
