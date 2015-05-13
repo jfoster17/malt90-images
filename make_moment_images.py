@@ -3,36 +3,30 @@
 """
 Make nice looking images of the 0th moment maps
 
-This is a wrapper script that calls the functions
-in MALT90Source which actually know how to display
-the moment maps. In this wrapper we just load in
-a catalog and generate images for all the entries.
+usage: make_moment_images [-h] [-i n] [-f m]
 
-Main other dependencies to check/edit:
-MALT90Source
-malt90_catalog
-malt_params
+optional arguments:
+-h       show this help message and exit
+-i n     start with ATLASGAL id number n 
+-f m     end with ATLASGAL id number m
+
+This is a wrapper script that calls the functions
+in MALT90MomentSource which actually know how to generate
+the 0th moment map images. In this wrapper we just load in
+a catalog and generate images for all the entries.
 
 Generally you will want to run make_agal_moments.py
 before running this script to update the actual
 moment maps before vizualizing them.
-
 """
 
-import sys
-import os
+import sys,os,getopt
 import MALT90MomentSource
 import pickle
-import matplotlib
-matplotlib.use('Agg')
 
-import matplotlib.pylab as plt
-from matplotlib.ticker import MaxNLocator
-from astropy.table import Table
 import numpy as np
 import malt90_catalog as mcat
 import malt_params as malt
-
 
 lines = ["hnco413","c2h","sio","h41a",
          "hc13ccn","hnco404","ch3cn","hc3n",
@@ -43,12 +37,13 @@ lines = ["hnco413","c2h","sio","h41a",
 mainlines = ["hcop","hnc","n2hp","hcn"]
 
 
-def generate_pickle():
+def generate_pickle(start_id,final_id):
     all_cores = []
     t = mcat.read_latest(malt.base+"/results/malt90catalog.cat")
 
     for i,source in enumerate(t['agid']):
-        if i < 10000:
+        num = float(source[2:])
+        if (num > start_id) and (num < final_id):
             print(source)
             vel = float(t['velocity'][i])
             sourcename = t['malt90_map'][i]
@@ -79,9 +74,31 @@ def make_moment_images(all_cores):
 
 
 def main():
+    start_id = 0
+    final_id = 99999
+    
+    try:
+        opts,args = getopt.getopt(sys.argv[1:],"i:f:h")
+    except getopt.GetoptError,err:
+        print(str(err))
+        print(__doc__)
+        sys.exit(2)
+    for o,a in opts:
+        if o == "-i":
+            start_id = int(a)
+        elif o == "-f":
+            final_id = int(a)
+        elif o == "-h":
+            print(__doc__)
+            sys.exit(1)
+        else:
+            assert False, "unhandled option"
+            print(__doc__)
+            sys.exit(2)
+    
     #Pickling does not work for old versions of astropy.table
     #Just generate the list every time for consistency.
-    all_cores = generate_pickle()
+    all_cores = generate_pickle(start_id,final_id)
     make_moment_images(all_cores)
 
 

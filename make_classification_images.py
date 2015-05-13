@@ -49,7 +49,8 @@ def main():
     
     do_spitzer = True
     do_herschel = True
-    
+    start_id = 0
+    final_id = 99999
     try:
         opts,args = getopt.getopt(sys.argv[1:],"i:f:sdh")
     except getopt.GetoptError,err:
