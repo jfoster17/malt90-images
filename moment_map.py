@@ -154,7 +154,7 @@ def get_filename(source,line,direction=None,altdir=None):
         filename = source+"_"+direction+line+"_MEAN.fits"
     if altdir:
         malt.data_dir = altdir
-    full_path = os.path.join(malt.data_dir,"gridzilla-clean",line,filename)
+    full_path = os.path.join(malt.data_dir,"gridzilla",line,filename)
     return(full_path)
 
 def calculate_moments(d,minchan=False,maxchan=False,
